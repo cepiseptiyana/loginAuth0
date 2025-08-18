@@ -66,7 +66,8 @@ app.get(
     failureRedirect: "/",
   }),
   (req, res) => {
-    res.redirect("https://shoping-ruddy.vercel.app/");
+    // res.redirect("https://shoping-ruddy.vercel.app/");
+    res.redirect("http://localhost:5173/");
   }
 );
 
