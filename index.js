@@ -66,7 +66,7 @@ app.get(
     failureRedirect: "/",
   }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("https://shoping-ruddy.vercel.app/");
   }
 );
 
