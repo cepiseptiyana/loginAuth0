@@ -5,7 +5,11 @@ const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: "http://localhost:5173", // frontend dev URL
+  credentials: true // penting untuk cookies/session
+}));
 
 require("dotenv").config();
 
