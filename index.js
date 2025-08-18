@@ -6,10 +6,12 @@ const Auth0Strategy = require("passport-auth0");
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:5173", // frontend dev URL
-  credentials: true // penting untuk cookies/session
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend dev URL
+    credentials: true, // penting untuk cookies/session
+  })
+);
 
 require("dotenv").config();
 
@@ -80,7 +82,7 @@ app.get("/users", (req, res) => {
   if (!req.user) {
     return res.status(401).json({ error: "Not logged in" });
   }
-  res.json(req);
+  res.json({ user: req.user });
 });
 
 module.exports = app;
