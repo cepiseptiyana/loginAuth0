@@ -24,8 +24,8 @@ app.use(
     saveUninitialized: true,
     cookie: {
       httpOnly: true,
-      secure: false, // wajib true di production (https)
-      sameSite: "none", // wajib kalau frontend beda domain
+      secure: true, // wajib true di production (https)
+      // sameSite: "none", // wajib kalau frontend beda domain
     },
   })
 );
