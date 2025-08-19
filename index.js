@@ -8,7 +8,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend dev URL
+    origin: "https://shoping-ruddy.vercel.app/",
+    // origin: "http://localhost:5173", // frontend dev URL
     credentials: true, // penting untuk cookies/session
   })
 );
@@ -49,15 +50,6 @@ passport.serializeUser((user, done) => done(null, user));
 // inject ke req.user
 passport.deserializeUser((user, done) => done(null, user));
 
-// ! rest
-// app.get("/", (req, res) => {
-//   if (req.user) {
-//     res.send(`<h1>Hello ${req.user.displayName}</h1>`);
-//   } else {
-//     res.send('<h1>Welcome, please <a href="/login">login</a></h1>');
-//   }
-// });
-
 app.get(
   "/login",
   passport.authenticate("auth0", {
@@ -72,19 +64,33 @@ app.get(
     failureRedirect: "/",
   }),
   (req, res) => {
-    // res.redirect("https://shoping-ruddy.vercel.app/");
-    res.redirect("http://localhost:5173/");
+    res.redirect("https://shoping-ruddy.vercel.app/");
+    // res.redirect("http://localhost:5173/");
   }
 );
 
 // wajib fetch credential
 app.get("/users", (req, res) => {
   if (!req.user) {
-    return res.status(401).json({ error: "Not logged in" });
+    return res.json({ loggedIn: false, user: null });
   }
-  res.json({ user: req.user });
+  res.json({ loggedIn: true, user: req.user });
+});
+
+// logout
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.clearCookie("connect.sid"); // optional: hapus cookie di browser
+      res.redirect("https://shoping-ruddy.vercel.app/");
+      // res.redirect("http://localhost:5173/");
+    }
+  });
 });
 
 module.exports = app;
-
-// app.listen(3000, () => console.log(`Server running on http://localhost:3000`));
+// app.listen(3000, () => {
+//   console.log("server running");
+// });
