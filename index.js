@@ -22,11 +22,11 @@ app.use(
     secret: process.env.SECRET_SESSION,
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      secure: true, // wajib true di production (https)
-      sameSite: "none", // wajib kalau frontend beda domain
-    },
+    // cookie: {
+    //   httpOnly: true,
+    //   secure: true, // wajib true di production (https)
+    //   sameSite: "none", // wajib kalau frontend beda domain
+    // },
   })
 );
 
