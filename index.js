@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://shoping-ruddy.vercel.app/",
+    origin: "https://shoping-ruddy.vercel.app",
     // origin: "http://localhost:5173", // frontend dev URL
     credentials: true, // penting untuk cookies/session
   })
